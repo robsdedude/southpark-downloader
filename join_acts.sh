@@ -3,19 +3,19 @@ set -e
 
 OIFS="$IFS"
 IFS=$'\n'
-acts1=$(find $1 -maxdepth 1 -iregex ".*\(Act 1\|1\. Akt\|1. Ak-\).*")
+acts1=$(find $1 -maxdepth 1 -iregex ".*\(Act 1\|1\. Akt\|1. Ak-\|Akt 1\).*")
 parts=$(echo $1 | sed -e 's/\/*$//')"/parts/"
 mkdir -p $parts
 echo "acts1: $acts1"
 for fn in $acts1; do
     echo "fn: $fn"
-    pattern=$(echo $fn | sed -e 's/Act [0-9]\+.*\.\|[0-9]\+\. Akt.*\.\|[0-9]\+. Ak-.*\./*./')
+    pathpattern=$(echo "$fn" | sed -e 's/Act 1.*\.mp4\|1\. Akt.*\.mp4\|1. Ak-.*\.mp4\|Akt 1.*\.mp4/*.mp4/')
+    echo "pathpattern: $pathpattern"
+    pattern=$(echo "$pathpattern" | rev | cut -d/ -f1 | rev)
     echo "pattern: $pattern"
-    pattern=$(echo "$pattern" | rev | cut -d/ -f1 | rev)
-    echo "pattern2: $pattern"
     group=$(find $1 -maxdepth 1 -iname "$pattern" | sort)
     echo "group: $group"
-    outfn=$(echo "$fn" | sed -e 's/[ -]*Act [0-9]\+.*$\|[ -]*[0-9]\+\. Akt.*$/.mp4/')
+    outfn=$(echo "$pathpattern" | sed -e 's/[ -]*\*\.mp4$/.mp4/')
     echo "outfn: $outfn"
     catargs=$(echo "$group" | sed -e 's/^/-cat "/g' -e 's/$/"/g' | tr '\n' ' ')
     echo "catargs: $catargs"
