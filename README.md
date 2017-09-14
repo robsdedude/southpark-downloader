@@ -16,7 +16,7 @@ Installation
  
 What the script does
 --------------------
-It will use `youtube-dl` to download all episodes of the season into a folder called `S20` for season 20. The episodes will be downloaded in 3-4 acts (that's how the South Park website works). `MP4Box` is then used to merge the acts together into one file. After that some renaming happens so that the files are in the right order.
+It will use `youtube-dl` to download all episodes of the season into a folder called `S20` for season 20. The episodes will be downloaded in 3-4 acts (that's how the South Park website works). `MP4Box` is then used to merge the acts together into one file. After that some renaming happens so that the files are in the right order. The renaming must be started manually. First check, that the episones and acts were named correctly (the South Park guys seem to fail frequently). Just open `join_acts.sh` and change `exit 0` to `#exit 0` then run `join_acts.sh` again.
 
 Pro Tips
 --------
