@@ -9,7 +9,7 @@ mkdir -p "S$1"
 cd "S$1"
 
 echo "Downloading episodes"
-~/youtube-dl -i $episodes
+youtube-dl -i $episodes
 cd ..
 echo "Merging episodes"
 ./join_acts.sh "S$1"
