@@ -29,8 +29,8 @@ done
 IFS="$OIFS"
 
 exit 0
-# run this part of the script after making sure that the southpart guys didn't
-# mess up the naming of the episone acts (because that happes frequently)
+# run this part of the script after making sure that the South Park guys didn't
+# mess up the naming of the episode acts (because that happens frequently)
 
 echo "Normalize file names"
 declare -a months=(January February March April May June July August September October November December)
