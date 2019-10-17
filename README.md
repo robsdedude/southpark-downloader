@@ -5,7 +5,7 @@ This is a quick hack to download full seasons of South Park from the official So
 Requirements
 ------------
 It's a **BASH** script. So you better have one available.
-You'll need [`youtube-dl`](https://rg3.github.io/youtube-dl/)(make sure it's the latest version) and [`MP4Box`](https://gpac.wp.imt.fr/mp4box/) as well as some standard command line tools (e.g. `curl`, `rename`, `find`)
+You'll need [`youtube-dl`](https://rg3.github.io/youtube-dl/)(make sure it's the latest version) and [`MP4Box`](https://gpac.wp.imt.fr/mp4box/) as well as some standard command line tools (i.e. `echo`, `curl`, `grep`, `sed`, `printf`, `mkdir`, `find`, `rev`, `cut`, `sort`, `tr`, `mv` `rename`)
 
 Installation
 ------------
