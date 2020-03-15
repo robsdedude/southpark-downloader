@@ -5,13 +5,13 @@ This is a quick hack to download full seasons of South Park from the official So
 Requirements (what do I need?)
 ------------------------------
 It's a **BASH** script. So you better have one available.
-You'll need [`youtube-dl`](https://rg3.github.io/youtube-dl/)(make sure it's the latest version) and [`MP4Box`](https://gpac.wp.imt.fr/mp4box/) as well as some standard command line tools (i.e. `echo`, `curl`, `grep`, `sed`, `printf`, `mkdir`, `find`, `rev`, `cut`, `sort`, `tr`, `mv`, and `rename`)
+You'll need [`youtube-dl`](https://rg3.github.io/youtube-dl/)(make sure it's the latest version) and [`MP4Box`](https://gpac.wp.imt.fr/mp4box/) as well as some standard command line tools (i.e. `echo`, `curl`, `grep`, `sed`, `printf`, `mkdir`, `find`, `rev`, `cut`, `sort`, `tr`, `xargs`, `mv`, and `rename`)
 
 Installation (how to get it running?)
 -------------------------------------
  - Download the [code](https://github.com/robsdedude/southpark-downloader/archive/master.zip)
  - Extract it to some folder (e.g. "South Park") and open a terminal there.
- - run `chmod +x join_acts.sh get_season.sh`.
+ - run `chmod +x join_acts.sh get_season.sh get_episodes.sh`.
  
 Usage (what does the script do?)
 --------------------------------
@@ -26,6 +26,9 @@ Language selection (how do I download non-English seasons?)
 -----------------------------------------------------------
 Just run `./get_season.sh <season_number> <language_code>` instead, where you replace `<season_number>` with the season you want to download and `<langauge_code>` with one of `en`, `de`, or `es` (e.g. `./get_season.sh 20 de`). The season will then be downloaded into a folder named `S<season_number>_<language_code>` (e.g. `S20_de`).
 
+Downloading single episodes
+---------------------------
+Simply run `./get_episodes.sh <season_number> <language_code> <episode_number(s)>`. The rest of this README still applies (e.g. you still have to fix naming mistakes). So please read the fine manual before opening issues. Example: `./get_episodes.sh 20 es 1 4 6` would download episodes 1, 4, and 6 of season 20 in Spanish (folder names as above).
 
 Top Tip (it's tip-top)
 ----------------------
