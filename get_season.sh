@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+DEBUG=false
+
 url_de='https://www.southpark.de/feeds/carousel/video/e3748950-6c2a-4201-8e45-89e255c06df1/30/1/json/!airdate/staffel-'${1}
 url_en='https://southpark.cc.com/feeds/carousel/video/6154fc40-b7a3-4387-94cc-fc42fc47376e/30/1/json/!airdate/season-'${1}
 url_es='https://southpark.cc.com/feeds/carousel/video/351c1323-0b96-402d-a8b9-40d01b2e9bde/30/1/json/!airdate/temporada-'${1}'?lang=es'
@@ -33,11 +35,18 @@ echo "Fetching episode list"
 episodes=$(curl -L "$url" | grep '"default":' |
            sed -e 's/^.*default.*:.*"https/https/g' -e 's/" *, *$//g')
 seasonpath="S$(printf "%02d" "${1}")_${lang}"
+if [ $DEBUG == true ]; then
+    seasonpath="${seasonpath}_dbg"
+fi
 mkdir -p ${seasonpath}
 cd ${seasonpath}
 
 echo "Downloading episodes"
-youtube-dl -i $episodes
+if [ $DEBUG != true ]; then
+    youtube-dl -i $episodes
+else
+    youtube-dl --get-filename -i $episodes | xargs -d '\n' touch
+fi
 cd ..
 echo "Merging episodes"
-./join_acts.sh ${seasonpath}
+./join_acts.sh ${seasonpath} ${DEBUG}

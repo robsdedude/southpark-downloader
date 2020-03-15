@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+DEBUG=${2:-false}
+echo ${DEBUG}
+if [ $DEBUG == true ]; then
+    echo "It's debug time!"
+else
+    echo "No debug time =("
+fi
+
 find $1 -maxdepth 1 -iname "*.mp4" | rename 's/–/-/g'
 find $1 -maxdepth 1 -iname "*.mp4" | rename 's/\s+/ /g'
 
@@ -22,13 +30,20 @@ for fn in $acts1; do
     echo "outfn: $outfn"
     catargs=$(echo "$group" | sed -e 's/^/-cat "/g' -e 's/$/"/g' | tr '\n' ' ')
     echo "catargs: $catargs"
-    bash -c "MP4Box $catargs -new \"$outfn\""
+    if [ $DEBUG != true ]; then
+        bash -c "MP4Box $catargs -new \"$outfn\""
+    else
+        touch ${outfn}
+    fi
     mv $group $parts
     echo
 done
 IFS="$OIFS"
 
-exit 0
+if [ $DEBUG == false ]; then
+    :
+    exit 0
+fi
 # run this part of the script after making sure that the South Park guys didn't
 # mess up the naming of the episode acts (because that happens frequently)
 
