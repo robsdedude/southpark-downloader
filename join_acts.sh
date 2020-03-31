@@ -51,7 +51,8 @@ echo "Normalize file names"
 declare -a months=(January February March April May June July August September October November December)
 for ((i = 0; i < ${#months[@]}; ++i)); do
     month=${months[$i]}
-    find $1 -maxdepth 1 -iname "*$month*.mp4" | rename "s/(.*)$month(.*)/\${1}$(printf "%02d" $((i+1)))\$2/i";
-    rename 's/South Park_(\d{2})\D*(\d{2})\D*(\d{4})(.*)/South Park_$3-$1-$2$4/' "$1/South Park_"*.mp4
+    find $1 -maxdepth 1 -iname "*$month*.mp4" | rename "s/(.*)$month(.*)/\${1}$(printf "%02d" $((i+1)))\$2/i"
 done
+rename 's/South Park_(\d{2})\D*(\d{2})\D*(\d{4})(.*)/South Park_$3-$1-$2$4/' "$1/South Park_"*.mp4
+rename 's/(South Park)_(\d{4}-\d{2}-\d{2})_.*?(\d{2})(\d{2}).* - (.*)/$1_S$3E$4_$2 - $5/' "$1/South Park_"*.mp4
 
