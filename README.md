@@ -7,7 +7,7 @@ Requirements (what do I need?)
 It's a **BASH** script. So you better have one available.
 You'll need [`youtube-dl`](https://rg3.github.io/youtube-dl/)(make sure it's the latest version) and [`ffmpeg`](https://www.ffmpeg.org/) as well as some standard command line tools (i.e. `echo`, `curl`, `grep`, `sed`, `printf`, `mkdir`, `find`, `rev`, `cut`, `sort`, `tr`, `xargs`, `mv`, and `rename`)
 
-Note about ffmpeg: ffmpeg can be build with and withouth all sorts of codecs and media formats supported. Soutpark uses (as far as I know) only mp4 (container) with H.264 (video codec) and mp4a (audio codec). These scripts will let ffmpeg (stream-copy)[https://ffmpeg.org/ffmpeg.html#Stream-copy] these videos. This means your ffmpeg build must (only) be capable of demuxing and muxing the container format (no need to de- or re-encode the codecs). To check run `ffmpeg -formats | grep mp4` and make sure you have D (demuxing) and E (muxing) support for mp4.
+Note about ffmpeg: ffmpeg can be built with and without all sorts of codecs and media formats supported. Southpark uses (as far as I know) only mp4 (container) with H.264 (video codec) and mp4a (audio codec). This project will let ffmpeg (stream-copy)[https://ffmpeg.org/ffmpeg.html#Stream-copy] those videos. This means your ffmpeg-build (only) needs to be capable of demuxing and muxing the container format, i.e. mp4 (no need to de- or re-encode the codecs). To check run `ffmpeg -formats | grep mp4` and make sure you have D (demuxing) and E (muxing) support for mp4.
 
 Installation (how to get it running?)
 -------------------------------------
@@ -34,4 +34,4 @@ Simply run `./get_episodes.sh <season_number> <language_code> <episode_number(s)
 
 Top Tip (it's tip-top)
 ----------------------
-Run `for i in {1..20}; do ./get_season.sh en $i; done` to download all seasons from 1 to 20 (including) in English.
+Run `for i in {1..20}; do ./get_season.sh $i en; done` to download all seasons from 1 to 20 (including) in English.
