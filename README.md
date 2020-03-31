@@ -32,4 +32,4 @@ Simply run `./get_episodes.sh <season_number> <language_code> <episode_number(s)
 
 Top Tip (it's tip-top)
 ----------------------
-Run `for i in {1..20}; do ./get_season.sh $i; done` to download all seasons from 1 to 20 (including).
+Run `for i in {1..20}; do ./get_season.sh en $i; done` to download all seasons from 1 to 20 (including) in English.
