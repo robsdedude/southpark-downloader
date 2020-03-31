@@ -2,11 +2,8 @@
 set -e
 
 DEBUG=${2:-false}
-echo ${DEBUG}
 if [ $DEBUG == true ]; then
     echo "It's debug time!"
-else
-    echo "No debug time =("
 fi
 
 find $1 -maxdepth 1 -iname "*.mp4" | rename 's/–/-/g'
@@ -27,11 +24,14 @@ for fn in $acts1; do
     group=$(find $1 -maxdepth 1 -iname "$pattern" | sort)
     echo "group: $group"
     outfn=$(echo "$pathpattern" | sed -e 's/[ -]*\*\.mp4$/.mp4/')
-    echo "outfn: $outfn"
-    catargs=$(echo "$group" | sed -e 's/^/-cat "/g' -e 's/$/"/g' | tr '\n' ' ')
-    echo "catargs: $catargs"
+    if [ $(echo "$group" | wc -l) -lt 3 ]; then
+        echo "Couldn't find 3 or more acts matching the act $group"
+        continue
+    fi
     if [ $DEBUG != true ]; then
-        bash -c "MP4Box $catargs -new \"$outfn\""
+        ffmpeg -f concat -safe 0 \
+               -i <(for f in $group; do printf "file '${PWD}/%s'\n" $(echo "$f" | sed -r "s/'/'\\\''/g"); done) \
+               -c copy "$outfn"
     else
         touch ${outfn}
     fi

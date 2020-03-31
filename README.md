@@ -5,7 +5,9 @@ This is a quick hack to download full seasons of South Park from the official So
 Requirements (what do I need?)
 ------------------------------
 It's a **BASH** script. So you better have one available.
-You'll need [`youtube-dl`](https://rg3.github.io/youtube-dl/)(make sure it's the latest version) and [`MP4Box`](https://gpac.wp.imt.fr/mp4box/) as well as some standard command line tools (i.e. `echo`, `curl`, `grep`, `sed`, `printf`, `mkdir`, `find`, `rev`, `cut`, `sort`, `tr`, `xargs`, `mv`, and `rename`)
+You'll need [`youtube-dl`](https://rg3.github.io/youtube-dl/)(make sure it's the latest version) and [`ffmpeg`](https://www.ffmpeg.org/) as well as some standard command line tools (i.e. `echo`, `curl`, `grep`, `sed`, `printf`, `mkdir`, `find`, `rev`, `cut`, `sort`, `tr`, `xargs`, `mv`, and `rename`)
+
+Note about ffmpeg: ffmpeg can be build with and withouth all sorts of codecs and media formats supported. Soutpark uses (as far as I know) only mp4 (container) with H.264 (video codec) and mp4a (audio codec). These scripts will let ffmpeg (stream-copy)[https://ffmpeg.org/ffmpeg.html#Stream-copy] these videos. This means your ffmpeg build must (only) be capable of demuxing and muxing the container format (no need to de- or re-encode the codecs). To check run `ffmpeg -formats | grep mp4` and make sure you have D (demuxing) and E (muxing) support for mp4.
 
 Installation (how to get it running?)
 -------------------------------------
@@ -15,7 +17,7 @@ Installation (how to get it running?)
  
 Usage (what does the script do?)
 --------------------------------
-When you run `./get_season.sh 20`it will use `youtube-dl` to download all episodes of the season into a folder called `S20_en` (other seasons in the same fashion). The episodes will be downloaded in 3-4 acts (that's how the South Park website works). `MP4Box` is then used to merge the acts together into one file. After that some renaming happens so that the files are in the right order. Before that renaming happens the script will exit. You now have to check manually that the episodes and acts were named correctly (the South Park guys seem to fail frequently). To do so, look through the created season folder(s); if you see failures, you'll notice them. Fix them, then open `join_acts.sh` and change `exit 0` to `#exit 0`. Finally run `./join_acts.sh S20_en` (again). After everything worked you can go through the season folders and delete the `parts` folder inside to save space. These are only kept for safety.
+When you run `./get_season.sh 20`it will use `youtube-dl` to download all episodes of the season into a folder called `S20_en` (other seasons in the same fashion). The episodes will be downloaded in 3-4 acts (that's how the South Park website works). `ffmpeg` is then used to merge the acts together into one file. After that some renaming happens so that the files are in the right order. Before that renaming happens the script will exit. You now have to check manually that the episodes and acts were named correctly (the South Park guys seem to fail frequently). To do so, look through the created season folder(s); if you see failures, you'll notice them. Fix them, then open `join_acts.sh` and change `exit 0` to `#exit 0`. Finally run `./join_acts.sh S20_en` (again). After everything worked you can go through the season folders and delete the `parts` folder inside to save space. These are only kept for safety.
 
 Naming mistakes (how do I know I fixed all of the naming mistakes mentioned before?)
 ------------------------------------------------------------------------------------
