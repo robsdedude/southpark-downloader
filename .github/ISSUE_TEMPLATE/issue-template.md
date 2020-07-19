@@ -11,6 +11,7 @@ assignees: ''
 Before opening an issue make sure you
  * have read the whole README carefully
  * have the latest version of youtube-dl installed. You can check with `youtube-dl --version`
+   check https://github.com/ytdl-org/youtube-dl/releases
  * have the required demuxing and muxing supported by ffmpeg
 -->
 # Versions
