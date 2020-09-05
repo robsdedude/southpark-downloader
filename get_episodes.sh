@@ -28,6 +28,9 @@ case ${lang} in
     ;;
 esac
 echo "Fetching episode list"
+if [ $DEBUG == true ]; then
+    echo "URL: $url"
+fi
 episodes=$(curl -L "$url" | grep '"default":' |
            sed -e 's/^.*default.*:.*"https/https/g' -e 's/" *, *$//g')
 
@@ -44,6 +47,7 @@ echo "Downloading episodes"
 if [ $DEBUG != true ]; then
     youtube-dl -i $episodes
 else
+    echo "Episodes $episodes"
     youtube-dl --get-filename -i $episodes | xargs -d '\n' touch
 fi
 cd ..
