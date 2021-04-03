@@ -1,3 +1,7 @@
+BROKEN
+======
+Southpark recently changed their websites fundamentally. Due to a lack of time on my side and `youtube-dl` not supporting the new sites anyway on the other side, this project is currently **BROKEN**.
+
 South Park Downloader
 =====================
 This is a quick hack to download full seasons of South Park from the official South Park website. It supports English, German, and Spanish. English and Spanish support however, are not fully tested as of now. If you encounter problems, feel free to open an issue.
